@@ -1,4 +1,5 @@
 package amazonTestScript;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -8,16 +9,16 @@ import java.util.List;
 public class AmazonProductList extends AmazonUserLogin {
 
 
-    public void searchProduct() throws Exception{
+    public void searchProduct() throws Exception {
         this.loginToAmazon();
         String search_text = config.getProperty("search_productValue");
         driver.findElement(By.id(locators.getProperty("product_searchbox"))).sendKeys(search_text);
         driver.findElement(By.xpath(locators.getProperty("click_searchbutton"))).click();
 
         String getProductListPageTitle = driver.getTitle();
-        String expectedProductListPageTitle = "Amazon.in: "+search_text;
+        String expectedProductListPageTitle = "Amazon.in: " + search_text;
 
-        if(expectedProductListPageTitle.equals(getProductListPageTitle)) {
+        if (expectedProductListPageTitle.equals(getProductListPageTitle)) {
             System.out.println("Navigated to Products List Page");
         }
     }
@@ -43,11 +44,9 @@ public class AmazonProductList extends AmazonUserLogin {
             for (k = 0; k < productDetails.length; k++) {
                 if (productDetails[k].equals("Sponsored") || productDetails[k].equals("Best seller") ||
                         productDetails[k].equals("Amazon's Choice") || productDetails[k].equals("Prime Day launch")) {
-                    productName = productDetails[k+1];
+                    productName = productDetails[k + 1];
                     break;
-                }
-                else
-                 {
+                } else {
                     productName = productDetails[k];
                     break;
                 }
