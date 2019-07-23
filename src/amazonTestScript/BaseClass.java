@@ -16,30 +16,29 @@ public class BaseClass {
     FileInputStream fis = null;
     ExcelReader excelReader = new ExcelReader();
     String amazon_signIn_title = "Amazon Sign In";
-    String excelDataPath = System.getProperty("user.dir")+ "\\src\\testData\\";
+    String excelDataPath = System.getProperty("user.dir") + "\\src\\testData\\";
     String excelFileName = "AmazonProductDetails.xlsx";
 
 
-    public WebDriver init() throws Exception{
-        String configDataPath = System.getProperty("user.dir")+ "\\src\\configurationData\\";
+    public WebDriver init() throws Exception {
+        String configDataPath = System.getProperty("user.dir") + "\\src\\configurationData\\";
 
-        if(driver==null){
+        if (driver == null) {
             // Load config.properties file
-            fis = new FileInputStream(configDataPath+"config.properties");
+            fis = new FileInputStream(configDataPath + "config.properties");
             config.load(fis);
 
             // Load locators.properties file
-            fis = new FileInputStream(configDataPath+"locators.properties");
+            fis = new FileInputStream(configDataPath + "locators.properties");
             locators.load(fis);
 
             // Get browser details from config file and Initialize the browser driver
-            if(config.getProperty("browser").equals("firefox")){
-                System.setProperty("webdriver.gecko.driver", configDataPath+"geckodriver.exe");
+            if (config.getProperty("browser").equals("firefox")) {
+                System.setProperty("webdriver.gecko.driver", configDataPath + "geckodriver.exe");
                 driver = new FirefoxDriver();
                 System.out.println("Initialized Firefox Browser");
-            }
-            else if(config.getProperty("browser").equals("chrome")){
-                System.setProperty("webdriver.chrome.driver", configDataPath+"chromedriver.exe");
+            } else if (config.getProperty("browser").equals("chrome")) {
+                System.setProperty("webdriver.chrome.driver", configDataPath + "chromedriver.exe");
                 driver = new ChromeDriver();
                 System.out.println("Initialized Chrome Browser");
             }
@@ -49,7 +48,7 @@ public class BaseClass {
             driver.manage().timeouts().implicitlyWait(20L, TimeUnit.SECONDS);
             // Maximize browser window
             driver.manage().window().maximize();
-            if(driver.getTitle() != "") {
+            if (driver.getTitle() != "") {
                 System.out.println("Url is successfully launched");
             }
         }
